@@ -3,6 +3,7 @@ class Tooltip extends HTMLElement {
     super()
     this._toolTipContainer
     this._toolTipText = 'no tooltip text'
+    this.attachShadow({mode: 'open'})
   }
 
   connectedCallback() { //WebComponent lifecycle method
@@ -17,6 +18,11 @@ class Tooltip extends HTMLElement {
   _showTooltip() {
     this._toolTipContainer = document.createElement('div')
     this._toolTipContainer.textContent = this._toolTipText
+    this._toolTipContainer.style.backgroundColor = 'black'
+    this._toolTipContainer.style.color = 'white'
+    this._toolTipContainer.style.position = 'absolute'
+    this.style.position = 'relative'
+    this._toolTipContainer.style.zIndex = 10
     this.appendChild(this._toolTipContainer)
   }
 
