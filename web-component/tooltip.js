@@ -12,7 +12,7 @@ class Tooltip extends HTMLElement {
     toolTipIcon.textContent = ' (?)'
     toolTipIcon.addEventListener('mouseenter', this._showTooltip.bind(this))
     toolTipIcon.addEventListener('mouseleave', this._hideTooltip.bind(this))
-    this.appendChild(toolTipIcon)
+    this.shadowRoot.appendChild(toolTipIcon)
   }
 
   _showTooltip() {
@@ -23,11 +23,11 @@ class Tooltip extends HTMLElement {
     this._toolTipContainer.style.position = 'absolute'
     this.style.position = 'relative'
     this._toolTipContainer.style.zIndex = 10
-    this.appendChild(this._toolTipContainer)
+    this.shadowRoot.appendChild(this._toolTipContainer)
   }
 
   _hideTooltip() {
-    this.removeChild(this._toolTipContainer)
+    this.shadowRoot.removeChild(this._toolTipContainer)
   }
 
 }
