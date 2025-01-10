@@ -5,6 +5,22 @@ class Tooltip extends HTMLElement {
     this._toolTipText = 'no tooltip text'
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.innerHTML = `
+        <style>
+            span {
+                color: black;
+                padding: 0.15rem 0.5rem;
+                border-radius: 3px;
+                cursor: help;
+            }
+            div {
+                position: absolute;
+                z-index: 10;
+                background-color: black;
+                color: white;
+                padding: 0.15rem 0.5rem;
+                border-radius: 3px;
+            }
+        </style>
         <slot></slot><span> (?)</span>
     `
   }
@@ -24,11 +40,6 @@ class Tooltip extends HTMLElement {
   _showTooltip() {
     this._toolTipContainer = document.createElement('div')
     this._toolTipContainer.textContent = this._toolTipText
-    this._toolTipContainer.style.backgroundColor = 'black'
-    this._toolTipContainer.style.color = 'white'
-    this._toolTipContainer.style.position = 'absolute'
-    this.style.position = 'relative'
-    this._toolTipContainer.style.zIndex = 10
     this.shadowRoot.appendChild(this._toolTipContainer)
   }
 
