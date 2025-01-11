@@ -6,9 +6,15 @@
   <title>webComponents</title>
   <script src="tooltip.js"></script>
   <script src="confirmLink.js"></script>
+  <style>
+    .highlight {
+      background-color: yellow; 
+      /* slots não são estilizados no shadow dom mas sim no light dom, pois eles pertecem ao light dom */
+    }
+  </style>
 </head>
 <body>
-  <p><mcintosh-tooltip text="webComponents is a set of standards">Test with webcomponents!</mcintosh-tooltip></p>
+  <p><mcintosh-tooltip text="webComponents is a set of standards"><span class="highlight"> Test with webcomponents!</span></mcintosh-tooltip></p>
   <p><mcintosh-tooltip text="my dog is not a webComponents">dogs name is mcintosh</mcintosh-tooltip></p>
   <div>This will not take the webComponent Styles</div>
 
