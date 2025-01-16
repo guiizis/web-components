@@ -20,8 +20,19 @@ class Tooltip extends HTMLElement {
                 padding: 0.15rem 0.5rem;
                 border-radius: 3px;
             }
+            :host {
+              background-color: grey;  
+            }
             ::slotted(.highlight) {
               background-color: orange !important; // the only way to style the slotted element is to use the ::slotted pseudo-element selector, the light style will override the shadow style
+            }
+            .icon {
+              background-color: black;
+              color: white;
+              padding: 0.15rem 0.5rem;
+              text-align: center;
+              border-radius: 50%;
+
             }
         </style>
         <slot></slot><span> (?)</span>
@@ -37,6 +48,7 @@ class Tooltip extends HTMLElement {
 
     tooltipIcon.addEventListener('mouseenter', this._showTooltip.bind(this))
     tooltipIcon.addEventListener('mouseleave', this._hideTooltip.bind(this))
+    tooltipIcon.classList.add('icon')
     this.shadowRoot.appendChild(tooltipIcon)
   }
 
