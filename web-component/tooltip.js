@@ -20,12 +20,15 @@ class Tooltip extends HTMLElement {
                 padding: 0.15rem 0.5rem;
                 border-radius: 3px;
             }
-            :host {
-              background-color: grey;  
+            // :host {
+            //   background-color: grey;  
+            // }
+            :host(.important) {
+              background-color: grey;
             }
-            ::slotted(.highlight) {
-              background-color: orange !important; // the only way to style the slotted element is to use the ::slotted pseudo-element selector, the light style will override the shadow style
-            }
+            // ::slotted(.highlight) {
+            //   background-color: orange !important; // the only way to style the slotted element is to use the ::slotted pseudo-element selector, the light style will override the shadow style
+            // }
             .icon {
               background-color: black;
               color: white;
