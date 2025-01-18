@@ -24,7 +24,7 @@ class Tooltip extends HTMLElement {
             //   background-color: grey;  
             // }
             :host(.important) {
-              background-color: grey;
+              background-color: var(--color-dash-primary);
             }
             // ::slotted(.highlight) {
             //   background-color: orange !important; // the only way to style the slotted element is to use the ::slotted pseudo-element selector, the light style will override the shadow style
