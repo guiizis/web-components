@@ -3,6 +3,7 @@ class Tooltip extends HTMLElement {
     super()
     this._toolTipContainer
     this._toolTipText = 'no tooltip text'
+    this._toolTipIcon
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.innerHTML = `
         <style>
@@ -55,12 +56,12 @@ class Tooltip extends HTMLElement {
       this._toolTipText = this.getAttribute('text')
     }
 
-    const tooltipIcon = this.shadowRoot.querySelector('span')
+    this._toolTipIcon = this.shadowRoot.querySelector('span')
 
-    tooltipIcon.addEventListener('mouseenter', this._showTooltip.bind(this))
-    tooltipIcon.addEventListener('mouseleave', this._hideTooltip.bind(this))
-    tooltipIcon.classList.add('icon')
-    this.shadowRoot.appendChild(tooltipIcon)
+    this._toolTipIcon.addEventListener('mouseenter', this._showTooltip.bind(this))
+    this._toolTipIcon.addEventListener('mouseleave', this._hideTooltip.bind(this))
+    this._toolTipIcon.classList.add('icon')
+    this.shadowRoot.appendChild(this._toolTipIcon)
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -70,6 +71,12 @@ class Tooltip extends HTMLElement {
     if (name === 'text') {
       this._toolTipText = newValue
     }
+  }
+
+  disconnectedCallback() { //WebComponent lifecycle method
+    console.log('disconnected')
+    this._toolTipIcon.removeEventListener('mouseenter', this._showTooltip)
+    this._toolTipIcon.removeEventListener('mouseleave', this._hideTooltip)
   }
 
   static get observedAttributes() {
