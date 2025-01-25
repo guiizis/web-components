@@ -1,9 +1,9 @@
 class Tooltip extends HTMLElement {
   constructor() {
     super()
-    this._toolTipContainer
     this._toolTipText = 'no tooltip text'
     this._toolTipIcon
+    this.tooltipVisible = false
     this.attachShadow({ mode: 'open' })
     this.shadowRoot.innerHTML = `
         <style>
@@ -62,10 +62,11 @@ class Tooltip extends HTMLElement {
     this._toolTipIcon.addEventListener('mouseleave', this._hideTooltip.bind(this))
     this._toolTipIcon.classList.add('icon')
     this.shadowRoot.appendChild(this._toolTipIcon)
+    this._render()
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    if(oldValue === newValue) {
+    if (oldValue === newValue) {
       return
     }
     if (name === 'text') {
@@ -79,18 +80,33 @@ class Tooltip extends HTMLElement {
     this._toolTipIcon.removeEventListener('mouseleave', this._hideTooltip)
   }
 
+  _render() {
+    let toolTipContainer = this.shadowRoot.querySelector('div')
+    if (this.tooltipVisible) {
+      toolTipContainer = document.createElement('div')
+      toolTipContainer.textContent = this._toolTipText
+      this.shadowRoot.appendChild(toolTipContainer)
+    }
+    else {
+      if (toolTipContainer) {
+        this.shadowRoot.removeChild(toolTipContainer)
+      }
+    }
+
+  }
+
   static get observedAttributes() {
     return ['text']
   }
 
-  _showTooltip() {
-    this._toolTipContainer = document.createElement('div')
-    this._toolTipContainer.textContent = this._toolTipText
-    this.shadowRoot.appendChild(this._toolTipContainer)
+  _showTooltip() { 
+    this.tooltipVisible = true
+    this._render()
   }
 
-  _hideTooltip() {
-    this.shadowRoot.removeChild(this._toolTipContainer)
+  _hideTooltip() { 
+    this.tooltipVisible = false
+    this._render()
   }
 
 }
