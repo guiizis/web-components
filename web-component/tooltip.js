@@ -25,9 +25,9 @@ class Tooltip extends HTMLElement {
                 font-weight: normal; 
                 box-shadow: 1px 1px 6px rgba(0,0,0,0.26);
             }
-            // :host {
-            //   background-color: grey;  
-            // }
+            :host {
+              position: relative; 
+            }
             :host(.important) {
               background-color: var(--color-dash-primary, #ccc);
               padding: 0.15rem 0.5rem;
@@ -94,6 +94,7 @@ class Tooltip extends HTMLElement {
     }
 
   }
+
 
   static get observedAttributes() {
     return ['text']
