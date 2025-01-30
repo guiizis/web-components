@@ -17,11 +17,23 @@
   </style>
 </head>
 <body>
-  <modal-mcintosh>
+  
+  <modal-mcintosh opened>
     <p>with your confirmation you confirm that my dog is fat</p>
-
   </modal-mcintosh>
+
   <p>please confirm your choise</p>
+
   <button>Show detail & confirm</button>
+
+  <script>
+    const modal = document.querySelector('modal-mcintosh');
+    const button = document.querySelector('button');
+
+    button.addEventListener('click', () => {
+      modal.setAttribute('opened', '');
+    });
+  </script>
+
 </body>
 </html>
