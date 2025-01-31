@@ -53,6 +53,11 @@ class Modal extends HTMLElement {
           margin: 0 0.25rem;
         }
 
+        :host([opened]) #backdrop, :host([opened]) #modal {
+          opacity: 1;
+          pointer-events: all;
+        }
+
       </style>
       
       <div id="backdrop"></div>
@@ -71,6 +76,24 @@ class Modal extends HTMLElement {
       </div>
     `;
   }
+
+  // attributeChangedCallback(name, oldValue, newValue) {
+  //   if (name === 'opened') {
+  //     if (this.hasAttribute('opened')) {
+  //       this.shadowRoot.querySelector('#backdrop').style.opacity = 1;
+  //       this.shadowRoot.querySelector('#backdrop').style.pointerEvents = 'all';
+  //       this.shadowRoot.querySelector('#modal').style.top = '15vh';
+  //     } else {
+  //       this.shadowRoot.querySelector('#backdrop').style.opacity = 0;
+  //       this.shadowRoot.querySelector('#backdrop').style.pointerEvents = 'none';
+  //       this.shadowRoot.querySelector('#modal').style.top = '-100vh';
+  //     }
+  //   }
+  // }
+
+  // static get observedAttributes() {
+  //   return ['opened'];
+  // }
 }
 
 customElements.define('modal-mcintosh', Modal);
