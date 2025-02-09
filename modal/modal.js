@@ -61,6 +61,9 @@ class Modal extends HTMLElement {
           pointer-events: all;
         }
 
+        ::slotted(h1) {
+          font-size: 1.25rem;
+        }
       </style>
       
       <div id="backdrop"></div>
@@ -78,6 +81,12 @@ class Modal extends HTMLElement {
 
       </div>
     `;
+
+    const slots = this.shadowRoot.querySelectorAll('slot');
+    slots[1].addEventListener('slotchange', event => {
+      console.dir(slots[1].assignedNodes());
+    });
+
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
