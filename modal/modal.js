@@ -2,6 +2,7 @@ class Modal extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
+    this.isOpen = false;
     this.shadowRoot.innerHTML = `
       <style>
         #backdrop {
@@ -28,6 +29,8 @@ class Modal extends HTMLElement {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
+          opacity: 0;
+          pointer-events: none;
         }
 
         header {
@@ -77,23 +80,24 @@ class Modal extends HTMLElement {
     `;
   }
 
-  // attributeChangedCallback(name, oldValue, newValue) {
-  //   if (name === 'opened') {
-  //     if (this.hasAttribute('opened')) {
-  //       this.shadowRoot.querySelector('#backdrop').style.opacity = 1;
-  //       this.shadowRoot.querySelector('#backdrop').style.pointerEvents = 'all';
-  //       this.shadowRoot.querySelector('#modal').style.top = '15vh';
-  //     } else {
-  //       this.shadowRoot.querySelector('#backdrop').style.opacity = 0;
-  //       this.shadowRoot.querySelector('#backdrop').style.pointerEvents = 'none';
-  //       this.shadowRoot.querySelector('#modal').style.top = '-100vh';
-  //     }
-  //   }
-  // }
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === 'opened') {
+      if (this.hasAttribute('opened')) {
+        this.isOpen = true;
+      } else {
+        this.isOpen = false;
+      }
+    }
+  }
 
-  // static get observedAttributes() {
-  //   return ['opened'];
-  // }
+  static get observedAttributes() {
+    return ['opened'];
+  }
+
+  open() {
+    this.setAttribute('opened', '');
+    this.isOpen = true;
+  }
 }
 
 customElements.define('modal-mcintosh', Modal);

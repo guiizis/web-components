@@ -18,7 +18,7 @@
 </head>
 <body>
   
-  <modal-mcintosh opened>
+  <modal-mcintosh>
     <p>with your confirmation you confirm that my dog is fat</p>
   </modal-mcintosh>
 
@@ -31,7 +31,10 @@
     const button = document.querySelector('button');
 
     button.addEventListener('click', () => {
-      modal.setAttribute('opened', '');
+      // modal.setAttribute('opened', '');
+      if(!modal.isOpen) {
+        modal.open();
+      }
     });
   </script>
 
