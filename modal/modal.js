@@ -66,9 +66,9 @@ class Modal extends HTMLElement {
       <div id="backdrop"></div>
       <div id="modal">
         <header>
-          <h1>Please Confirm</h1>          
+          <slot name="title">Please confirm doggo status</slot>       
         </header>
-        <section id="main">
+        <section id="main" name="title">
           <slot></slot>
         </section>
         <section id="actions">
