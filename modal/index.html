@@ -33,12 +33,11 @@
 
     modal.addEventListener('confirm', () => {
       console.log('confirmed');
-      modal.close();
+      modal.open();
     });
 
     modal.addEventListener('cancel', () => {
       console.log('canceled');
-      modal.close();
     });
 
     button.addEventListener('click', () => {
