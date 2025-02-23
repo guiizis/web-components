@@ -31,6 +31,16 @@
     const modal = document.querySelector('modal-mcintosh');
     const button = document.querySelector('button');
 
+    modal.addEventListener('confirm', () => {
+      console.log('confirmed');
+      modal.close();
+    });
+
+    modal.addEventListener('cancel', () => {
+      console.log('canceled');
+      modal.close();
+    });
+
     button.addEventListener('click', () => {
       // modal.setAttribute('opened', '');
       if(!modal.isOpen) {
