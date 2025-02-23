@@ -20,7 +20,7 @@ class Modal extends HTMLElement {
         #modal {
           position: fixed;
           z-index: 100;
-          top: 15vh;
+          top: 10vh;
           left: 25%;
           width: 50%;
           background: white;
@@ -31,10 +31,12 @@ class Modal extends HTMLElement {
           justify-content: space-between;
           opacity: 0;
           pointer-events: none;
+          transition: all 0.3s ease-out;
         }
 
         header {
           padding: 1rem;
+          border-bottom: 1px solid #ccc;
         }
 
         header h1 {
@@ -61,8 +63,13 @@ class Modal extends HTMLElement {
           pointer-events: all;
         }
 
+        :host([opened]) #modal {
+          top: 15vh;
+        }
+
         ::slotted(h1) {
           font-size: 1.25rem;
+          margin: 0;
         }
       </style>
       
@@ -82,16 +89,18 @@ class Modal extends HTMLElement {
       </div>
     `;
 
-    const slots = this.shadowRoot.querySelectorAll('slot');
+    const slots = this.shadowRoot.querySelectorAll('slot')
     slots[1].addEventListener('slotchange', event => {
-      console.dir(slots[1].assignedNodes());
-    });
-    const cancelButton = this.shadowRoot.querySelector('#cancel-button');
-    const confirmButton = this.shadowRoot.querySelector('#confirm-button');
-    cancelButton.addEventListener('click', this._cancel.bind(this));
-    confirmButton.addEventListener('click', this._confirm.bind(this));
+      console.dir(slots[1].assignedNodes())
+    })
+    const backdrop = this.shadowRoot.querySelector('#backdrop')
+    backdrop.addEventListener('click', this._cancel.bind(this))
+    const cancelButton = this.shadowRoot.querySelector('#cancel-button')
+    const confirmButton = this.shadowRoot.querySelector('#confirm-button')
+    cancelButton.addEventListener('click', this._cancel.bind(this))
+    confirmButton.addEventListener('click', this._confirm.bind(this))
     // cancelButton.addEventListener('cancel', () => {
-    //   console.log('Cancel inside the component');
+    //   console.log('Cancel inside the component')
     // })
   }
 
