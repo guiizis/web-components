@@ -30,10 +30,11 @@
       color: black;
     }
   </style>
-
 </head>
 
 <body>
+  <button style="z-index: 1000; background: black; color: white; position: absolute;">Open Side Menu</button>
+
   <mc-side-drawer alow="mcintosh title">
     <nav class="side-nav">
       <ul>
@@ -42,6 +43,16 @@
       </ul>
     </nav>
   </mc-side-drawer>
+
+  <script>
+    const button = document.querySelector('button');
+    const sideDrawer = document.querySelector('mc-side-drawer');
+
+    button.addEventListener('click', () => {
+      sideDrawer.open = !sideDrawer.open;
+    });
+  </script>
+
 </body>
 
 </html>
