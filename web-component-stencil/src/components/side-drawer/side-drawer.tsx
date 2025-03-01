@@ -6,7 +6,7 @@ import { Component, h, Prop } from '@stencil/core';
   shadow: true
 })
 export class SideDrawer {
-  @Prop() alow: string;
+  @Prop({reflect: true}) alow: string;
 
   render() {
     console.log(this.alow)
