@@ -1,4 +1,4 @@
-import { Component, h } from '@stencil/core';
+import { Component, h, Prop } from '@stencil/core';
 
 @Component({
   tag: 'mc-side-drawer',
@@ -6,10 +6,19 @@ import { Component, h } from '@stencil/core';
   shadow: true
 })
 export class SideDrawer {
+  @Prop() alow: string;
+
   render() {
+    console.log(this.alow)
     return (
       <aside>
-        <h1>The side drawer</h1>
+        <header>
+          <h1>{this.alow}</h1>
+        </header>
+        <main>
+          <slot>
+          </slot>
+        </main>
       </aside>
     )
   }
