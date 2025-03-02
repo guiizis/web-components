@@ -41,7 +41,8 @@ export class SideDrawer {
       )
     }
 
-    return (
+    return [
+      <div class="backdrop"  onClick={this.onCloseDrawer.bind(this)}/>,
       <aside>
         <header>
           <h1>{this.alow}</h1>
@@ -55,6 +56,6 @@ export class SideDrawer {
           {mainContent}
         </main>
       </aside>
-    )
+    ]
   }
 }
