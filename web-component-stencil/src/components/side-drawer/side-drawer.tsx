@@ -30,12 +30,18 @@ export class SideDrawer {
     //   );
     // }
 
+    let mainContent = <slot></slot>;
+
     return (
       <aside>
         <header>
           <h1>{this.alow}</h1>
           <button onClick={this.onCloseDrawer.bind(this)}>X</button>
         </header>
+        <section id='tabs'>
+          <button class="active">Navigation</button>
+          <button>Contact</button>
+        </section>
         <main>
           <slot>
           </slot>
