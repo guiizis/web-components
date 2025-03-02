@@ -9,6 +9,10 @@ export class SideDrawer {
   @Prop({ reflect: true }) alow: string;
   @Prop({ reflect: true, mutable: true }) open: boolean;
 
+  onContentChange(content: string) {
+    console.log(content);
+  }
+
   onCloseDrawer() {
     this.open = false;
   }
@@ -31,6 +35,16 @@ export class SideDrawer {
     // }
 
     let mainContent = <slot></slot>;
+    mainContent = (
+      <div id='contact-information'>
+        <h2>contact information</h2>
+        <p>You can reach us via phone or email.</p>
+        <ul>
+          <li>Phone: 1234567890</li>
+          <li>Email: <a href="mailto:test@test.com">test@test.com</a></li>
+        </ul>
+      </div>
+    )
 
     return (
       <aside>
@@ -39,12 +53,11 @@ export class SideDrawer {
           <button onClick={this.onCloseDrawer.bind(this)}>X</button>
         </header>
         <section id='tabs'>
-          <button class="active">Navigation</button>
-          <button>Contact</button>
+          <button onClick={this.onContentChange.bind(this, 'nav')}>Navigation</button>
+          <button onClick={this.onContentChange.bind(this, 'contact')}>Contact</button>
         </section>
         <main>
-          <slot>
-          </slot>
+          {mainContent}
         </main>
       </aside>
     )
