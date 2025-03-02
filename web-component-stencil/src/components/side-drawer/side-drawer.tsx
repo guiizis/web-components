@@ -1,4 +1,4 @@
-import { Component, h, Prop, State } from '@stencil/core';
+import { Component, h, Method, Prop, State } from '@stencil/core';
 
 @Component({
   tag: 'mc-side-drawer',
@@ -14,27 +14,18 @@ export class SideDrawer {
     this.showContactInfo = content === 'contact' ? true : false;
   }
 
+  @Method()
+  openMethod() {
+    console.log('openMethod');
+    this.open = !this.open;
+    console.log(this.open)
+  }
+
   onCloseDrawer() {
     this.open = false;
   }
 
   render() {
-    // let content = null;
-
-    // if (this.open) {
-    //   content = (
-    //     <aside>
-    //       <header>
-    //         <h1>{this.alow}</h1>
-    //       </header>
-    //       <main>
-    //         <slot>
-    //         </slot>
-    //       </main>
-    //     </aside>
-    //   );
-    // }
-
     let mainContent = <slot></slot>;
 
     if (this.showContactInfo) {

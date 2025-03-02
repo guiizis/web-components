@@ -9,6 +9,7 @@ export namespace Components {
     interface McSideDrawer {
         "alow": string;
         "open": boolean;
+        "openMethod": () => Promise<void>;
     }
     interface MyComponent {
         /**
