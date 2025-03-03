@@ -1,4 +1,4 @@
-import { Component, h, State } from "@stencil/core";
+import { Component, Element, h, State } from "@stencil/core";
 import { apiKey } from "./../../global/global";
 
 @Component({
@@ -8,14 +8,15 @@ import { apiKey } from "./../../global/global";
 })
 export class StockPrice {
   @State() apiData: number;
+  @Element() el: HTMLElement;
 
-  componentWillLoad() {
-    this.onFetchStockPrice();
-  }
-
-  onFetchStockPrice(event: Event = new Event('')) {
+  onFetchStockPrice(event: Event) {
     event.preventDefault();
-    fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=MSFT&apikey=${apiKey}`)
+
+    const stockSymbolInput = this.el.shadowRoot.querySelector('input');
+    const stockSymbol = stockSymbolInput.value;
+
+    fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${stockSymbol}&apikey=${apiKey}`)
       .then(async (res) => {
         const parsedResponse = await res.json();
         this.apiData = +parsedResponse['Global Quote']['05. price'];
@@ -27,7 +28,7 @@ export class StockPrice {
 
   render() {
     return [
-      <form onSubmit={this.onFetchStockPrice}>
+      <form onSubmit={this.onFetchStockPrice.bind(this)}>
         <input id="stock-symbol" />
         <button type="submit">Fetch</button>
       </form>,
