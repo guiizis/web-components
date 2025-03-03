@@ -8,7 +8,6 @@ import { Component, h } from "@stencil/core";
 export class StockPrice {
   onFetchStockPrice(event: Event) {
     event.preventDefault();
-
   }
 
   render() {
