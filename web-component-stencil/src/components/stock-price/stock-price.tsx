@@ -1,4 +1,4 @@
-import { Component, h } from "@stencil/core";
+import { Component, h, State } from "@stencil/core";
 
 @Component({
   tag: 'mc-stock-price',
@@ -6,8 +6,22 @@ import { Component, h } from "@stencil/core";
   shadow: true
 })
 export class StockPrice {
-  onFetchStockPrice(event: Event) {
+  @State() apiData: number;
+
+  componentWillLoad() {
+    this.onFetchStockPrice();
+  }
+
+  onFetchStockPrice(event: Event = new Event('')) {
     event.preventDefault();
+    fetch('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=MSFT&apikey=demo')
+      .then(async (res) => {
+        const parsedResponse = await res.json();
+        this.apiData = +parsedResponse['Global Quote']['05. price'];
+      })
+      .catch(err => {
+        console.error('We have an error:', err)
+      })
   }
 
   render() {
@@ -17,9 +31,9 @@ export class StockPrice {
         <button type="submit">Fetch</button>
       </form>,
       <div>
-        Price: {0}
+        Price: ${this.apiData}
       </div>
     ]
   }
 }
-//E8T6EIYEPN3WHKBA
+
