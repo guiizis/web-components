@@ -1,4 +1,4 @@
-import { Component } from "@stencil/core";
+import { Component, h } from "@stencil/core";
 
 @Component({
   tag: 'mc-stock-price',
@@ -6,5 +6,16 @@ import { Component } from "@stencil/core";
   shadow: true
 })
 export class StockPrice {
-
+  render() {
+    return [
+      <form>
+        <input id="stock-symbol" />
+        <button type="submit">Fetch</button>
+      </form>,
+      <div>
+        Price: {0}
+      </div>
+    ]
+  }
 }
+//E8T6EIYEPN3WHKBA
