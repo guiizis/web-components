@@ -1,4 +1,5 @@
 import { Component, h, State } from "@stencil/core";
+import { apiKey } from "./../../global/global";
 
 @Component({
   tag: 'mc-stock-price',
@@ -14,7 +15,7 @@ export class StockPrice {
 
   onFetchStockPrice(event: Event = new Event('')) {
     event.preventDefault();
-    fetch('https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=MSFT&apikey=demo')
+    fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=MSFT&apikey=${apiKey}`)
       .then(async (res) => {
         const parsedResponse = await res.json();
         this.apiData = +parsedResponse['Global Quote']['05. price'];
