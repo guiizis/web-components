@@ -11,6 +11,8 @@ export namespace Components {
         "open": boolean;
         "openMethod": () => Promise<void>;
     }
+    interface McStockPrice {
+    }
     interface MyComponent {
         /**
           * The first name
@@ -33,6 +35,12 @@ declare global {
         prototype: HTMLMcSideDrawerElement;
         new (): HTMLMcSideDrawerElement;
     };
+    interface HTMLMcStockPriceElement extends Components.McStockPrice, HTMLStencilElement {
+    }
+    var HTMLMcStockPriceElement: {
+        prototype: HTMLMcStockPriceElement;
+        new (): HTMLMcStockPriceElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
@@ -41,6 +49,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "mc-side-drawer": HTMLMcSideDrawerElement;
+        "mc-stock-price": HTMLMcStockPriceElement;
         "my-component": HTMLMyComponentElement;
     }
 }
@@ -48,6 +57,8 @@ declare namespace LocalJSX {
     interface McSideDrawer {
         "alow"?: string;
         "open"?: boolean;
+    }
+    interface McStockPrice {
     }
     interface MyComponent {
         /**
@@ -65,6 +76,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "mc-side-drawer": McSideDrawer;
+        "mc-stock-price": McStockPrice;
         "my-component": MyComponent;
     }
 }
@@ -73,6 +85,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "mc-side-drawer": LocalJSX.McSideDrawer & JSXBase.HTMLAttributes<HTMLMcSideDrawerElement>;
+            "mc-stock-price": LocalJSX.McStockPrice & JSXBase.HTMLAttributes<HTMLMcStockPriceElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
     }
