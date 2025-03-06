@@ -12,6 +12,11 @@ export namespace Components {
         "openMethod": () => Promise<void>;
     }
     interface McStockPrice {
+        "stockSymbol": string;
+        /**
+         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
+         */
+        "stock-symbol"?: string;
     }
     interface MyComponent {
         /**
@@ -59,6 +64,11 @@ declare namespace LocalJSX {
         "open"?: boolean;
     }
     interface McStockPrice {
+        "stockSymbol"?: string;
+        /**
+         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
+         */
+        "stock-symbol"?: string;
     }
     interface MyComponent {
         /**
