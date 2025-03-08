@@ -11,7 +11,7 @@ export class StockFinder {
 
   onFindStock(event: Event) {
     event.preventDefault();
-    const stockName = this.stockNameInput.value
+    const stockName = this.stockNameInput.value?.trim()
 
     fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${stockName}&apikey=${apiKey}`)
     .then(async (res) => {
