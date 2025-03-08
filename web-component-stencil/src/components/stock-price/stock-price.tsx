@@ -34,6 +34,11 @@ export class StockPrice {
     this.fetchStockPrice(stockSymbol)
   }
 
+  componentWillLoad() {
+    console.log('componentWillLoad')
+    this.apiData = 0
+  }
+
   componentDidLoad() {
     console.log(this.stockSymbol)
     if (this.stockSymbol) {
@@ -41,6 +46,18 @@ export class StockPrice {
       this.stockUserInputValid = true
       this.fetchStockPrice(this.stockSymbol)
     }
+  }
+
+  componentWillUpdate() {
+    // console.log('componentWillUpdate')
+  }
+
+  componentDidUpdate() {
+    // console.log('componentDidUpdate')
+  }
+
+  disconnectedCallback() {
+    // console.log('componentDidUnload')
   }
 
   fetchStockPrice(symbol: string) {
