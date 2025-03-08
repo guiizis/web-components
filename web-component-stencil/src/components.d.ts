@@ -35,6 +35,10 @@ export namespace Components {
         "middle": string;
     }
 }
+export interface McStockFinderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMcStockFinderElement;
+}
 declare global {
     interface HTMLMcSideDrawerElement extends Components.McSideDrawer, HTMLStencilElement {
     }
@@ -42,7 +46,18 @@ declare global {
         prototype: HTMLMcSideDrawerElement;
         new (): HTMLMcSideDrawerElement;
     };
+    interface HTMLMcStockFinderElementEventMap {
+        "mcSymbolSelected": any;
+    }
     interface HTMLMcStockFinderElement extends Components.McStockFinder, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMcStockFinderElementEventMap>(type: K, listener: (this: HTMLMcStockFinderElement, ev: McStockFinderCustomEvent<HTMLMcStockFinderElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMcStockFinderElementEventMap>(type: K, listener: (this: HTMLMcStockFinderElement, ev: McStockFinderCustomEvent<HTMLMcStockFinderElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLMcStockFinderElement: {
         prototype: HTMLMcStockFinderElement;
@@ -73,6 +88,7 @@ declare namespace LocalJSX {
         "open"?: boolean;
     }
     interface McStockFinder {
+        "onMcSymbolSelected"?: (event: McStockFinderCustomEvent<any>) => void;
     }
     interface McStockPrice {
         "stockSymbol"?: string;

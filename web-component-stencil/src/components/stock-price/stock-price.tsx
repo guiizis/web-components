@@ -1,4 +1,4 @@
-import { Component, Element, h, Prop, State, Watch } from "@stencil/core"
+import { Component, Element, h, Listen, Prop, State, Watch } from "@stencil/core"
 import { apiKey } from "./../../global/global"
 
 @Component({
@@ -12,6 +12,14 @@ export class StockPrice {
   @State() stockUserInputValid = false
   @State() error: string
   @Element() el: HTMLElement
+
+  @Listen('mcSymbolSelected', { target: 'body' })
+  onStockSymbolSelected(event: CustomEvent) {
+    event.preventDefault()
+    if (event.detail && event.detail !== this.stockSymbol) {
+      this.stockSymbol = event.detail
+    }
+  }
 
   @Watch('stockSymbol')
   stockSymbolChanged(newValue: string, oldValue: string) {
