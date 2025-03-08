@@ -15,7 +15,6 @@ export class StockPrice {
 
   @Listen('mcSymbolSelected', { target: 'body' })
   onStockSymbolSelected(event: CustomEvent) {
-    event.preventDefault()
     if (event.detail && event.detail !== this.stockSymbol) {
       this.stockSymbol = event.detail
     }
@@ -84,20 +83,23 @@ export class StockPrice {
   }
 
   fetchStockPrice(symbol: string) {
+    if (symbol !== null) {
+      fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${apiKey}`)
+        .then(async (res) => {
+          const parsedResponse = await res.json()
+          console.log(parsedResponse)
+          if (!parsedResponse['Global Quote']['05. price']) {
+            throw new Error('Invalid symbol')
+          }
+          this.error = null
+          this.apiData = +parsedResponse['Global Quote']['05. price']
+        })
+        .catch(err => {
+          this.error = err.message
+          console.error('We have an error:', err)
+        })
+    }
 
-    fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${apiKey}`)
-      .then(async (res) => {
-        const parsedResponse = await res.json()
-        if (!parsedResponse['Global Quote']['05. price']) {
-          throw new Error('Invalid symbol')
-        }
-        this.error = null
-        this.apiData = +parsedResponse['Global Quote']['05. price']
-      })
-      .catch(err => {
-        this.error = err.message
-        console.error('We have an error:', err)
-      })
   }
 
   render() {
