@@ -15,6 +15,7 @@ export class StockPrice {
   // stockInput: HTMLInputElement
 
   @Prop({ mutable: true, reflect: true }) stockSymbol: string
+  initialStockSymbol: string
 
   onUserInput(event: Event) {
     this.stockUserInput = (event.target as HTMLInputElement).value
@@ -42,6 +43,7 @@ export class StockPrice {
   componentDidLoad() {
     console.log(this.stockSymbol)
     if (this.stockSymbol) {
+      this.initialStockSymbol = this.stockSymbol
       this.stockUserInput = this.stockSymbol
       this.stockUserInputValid = true
       this.fetchStockPrice(this.stockSymbol)
@@ -54,6 +56,10 @@ export class StockPrice {
 
   componentDidUpdate() {
     // console.log('componentDidUpdate')
+    if (this.initialStockSymbol !== this.stockSymbol) {
+      this.initialStockSymbol = this.stockSymbol
+      this.fetchStockPrice(this.stockSymbol)
+    }
   }
 
   disconnectedCallback() {
