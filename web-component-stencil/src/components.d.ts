@@ -11,6 +11,8 @@ export namespace Components {
         "open": boolean;
         "openMethod": () => Promise<void>;
     }
+    interface McStockFinder {
+    }
     interface McStockPrice {
         "stockSymbol": string;
         /**
@@ -40,6 +42,12 @@ declare global {
         prototype: HTMLMcSideDrawerElement;
         new (): HTMLMcSideDrawerElement;
     };
+    interface HTMLMcStockFinderElement extends Components.McStockFinder, HTMLStencilElement {
+    }
+    var HTMLMcStockFinderElement: {
+        prototype: HTMLMcStockFinderElement;
+        new (): HTMLMcStockFinderElement;
+    };
     interface HTMLMcStockPriceElement extends Components.McStockPrice, HTMLStencilElement {
     }
     var HTMLMcStockPriceElement: {
@@ -54,6 +62,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "mc-side-drawer": HTMLMcSideDrawerElement;
+        "mc-stock-finder": HTMLMcStockFinderElement;
         "mc-stock-price": HTMLMcStockPriceElement;
         "my-component": HTMLMyComponentElement;
     }
@@ -62,6 +71,8 @@ declare namespace LocalJSX {
     interface McSideDrawer {
         "alow"?: string;
         "open"?: boolean;
+    }
+    interface McStockFinder {
     }
     interface McStockPrice {
         "stockSymbol"?: string;
@@ -86,6 +97,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "mc-side-drawer": McSideDrawer;
+        "mc-stock-finder": McStockFinder;
         "mc-stock-price": McStockPrice;
         "my-component": MyComponent;
     }
@@ -95,6 +107,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "mc-side-drawer": LocalJSX.McSideDrawer & JSXBase.HTMLAttributes<HTMLMcSideDrawerElement>;
+            "mc-stock-finder": LocalJSX.McStockFinder & JSXBase.HTMLAttributes<HTMLMcStockFinderElement>;
             "mc-stock-price": LocalJSX.McStockPrice & JSXBase.HTMLAttributes<HTMLMcStockPriceElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
