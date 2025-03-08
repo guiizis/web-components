@@ -1,4 +1,4 @@
-import { Component, Element, h, Prop, State } from "@stencil/core"
+import { Component, Element, h, Prop, State, Watch } from "@stencil/core"
 import { apiKey } from "./../../global/global"
 
 @Component({
@@ -12,10 +12,19 @@ export class StockPrice {
   @State() stockUserInputValid = false
   @State() error: string
   @Element() el: HTMLElement
+
+  @Watch('stockSymbol')
+  stockSymbolChanged(newValue: string, oldValue: string) {
+    if (newValue !== oldValue) {
+      this.stockUserInput = newValue
+      this.stockUserInputValid = true
+      this.fetchStockPrice(newValue)
+    }
+  }
   // stockInput: HTMLInputElement
 
   @Prop({ mutable: true, reflect: true }) stockSymbol: string
-  initialStockSymbol: string
+  // initialStockSymbol: string
 
   onUserInput(event: Event) {
     this.stockUserInput = (event.target as HTMLInputElement).value
@@ -43,7 +52,7 @@ export class StockPrice {
   componentDidLoad() {
     console.log(this.stockSymbol)
     if (this.stockSymbol) {
-      this.initialStockSymbol = this.stockSymbol
+      // this.initialStockSymbol = this.stockSymbol
       this.stockUserInput = this.stockSymbol
       this.stockUserInputValid = true
       this.fetchStockPrice(this.stockSymbol)
@@ -56,10 +65,10 @@ export class StockPrice {
 
   componentDidUpdate() {
     // console.log('componentDidUpdate')
-    if (this.initialStockSymbol !== this.stockSymbol) {
-      this.initialStockSymbol = this.stockSymbol
-      this.fetchStockPrice(this.stockSymbol)
-    }
+    // if (this.initialStockSymbol !== this.stockSymbol) {
+    //   this.initialStockSymbol = this.stockSymbol
+    //   this.fetchStockPrice(this.stockSymbol)
+    // }
   }
 
   disconnectedCallback() {
