@@ -38,9 +38,13 @@ export class StockFinder {
         <button type="submit">Find</button>
       </form>,
       <ul>
+        <li>
+          <strong>Name</strong>
+          <strong>Symbol</strong>
+        </li>
         {this.results.map((result) => (
           <li>
-            <strong>{result['2. name']} </strong>
+            <strong>{result['2. name']}</strong>
             <strong>{result['1. symbol']}</strong>
           </li>
         ))}
