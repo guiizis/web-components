@@ -2,7 +2,7 @@ import { Config } from '@stencil/core';
 import dotEnvPlugin  from 'rollup-plugin-dotenv';
 
 export const config: Config = {
-  namespace: 'web-component-stencil',
+  namespace: 'mcintosh-web-component-stencil',
   outputTargets: [
     {
       type: 'dist',
@@ -16,10 +16,10 @@ export const config: Config = {
     {
       type: 'docs-readme',
     },
-    {
-      type: 'www',
-      serviceWorker: null, // disable service workers
-    },
+    // {
+    //   type: 'www',
+    //   serviceWorker: null, // disable service workers
+    // },
   ],
   plugins: [
     dotEnvPlugin(),
