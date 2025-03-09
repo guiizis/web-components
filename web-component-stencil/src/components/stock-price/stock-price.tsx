@@ -10,6 +10,7 @@ export class StockPrice {
   @State() apiData: number
   @State() stockUserInput: string
   @State() stockUserInputValid = false
+  @State() loading = false
   @State() error: string
   @Element() el: HTMLElement
 
@@ -83,6 +84,8 @@ export class StockPrice {
   }
 
   fetchStockPrice(symbol: string) {
+    this.loading = true
+
     if (symbol !== null) {
       fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${apiKey}`)
         .then(async (res) => {
@@ -93,10 +96,12 @@ export class StockPrice {
           }
           this.error = null
           this.apiData = +parsedResponse['Global Quote']['05. price']
+          this.loading = false
         })
         .catch(err => {
           this.error = err.message
-          this.apiData = null
+          // this.apiData = null
+          this.loading = false
           console.error('We have an error:', err)
         })
     }
@@ -120,6 +125,8 @@ export class StockPrice {
       dataContent = <p>{this.error}</p>
     }
 
+    const spinner = <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+
     return [
       <form onSubmit={this.onFetchStockPrice.bind(this)}>
         {/* <input id="stock-symbol" ref={el => this.stockInput = el}/> */}
@@ -130,10 +137,10 @@ export class StockPrice {
             onInput={this.onUserInput.bind(this)}
           />
         }
-        <button disabled={!this.stockUserInputValid} type="submit">Fetch</button>
+        <button disabled={!this.stockUserInputValid || this.loading} type="submit">Fetch</button>
       </form>,
       <div>
-        {dataContent}
+        {this.loading ? spinner : dataContent}
       </div>
     ]
   }
