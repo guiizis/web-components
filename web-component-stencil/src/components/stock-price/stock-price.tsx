@@ -96,10 +96,17 @@ export class StockPrice {
         })
         .catch(err => {
           this.error = err.message
+          this.apiData = null
           console.error('We have an error:', err)
         })
     }
 
+  }
+
+  hostData() {
+    return {
+      class: this.error ? 'error' : ''
+    }
   }
 
   render() {

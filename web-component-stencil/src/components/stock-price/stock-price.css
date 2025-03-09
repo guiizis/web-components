@@ -10,6 +10,10 @@
   display: block;
 }
 
+:host(.error) {
+  border-color: #e81123;
+}
+
 form input {
   font: inherit;
   padding: 0.25rem;
