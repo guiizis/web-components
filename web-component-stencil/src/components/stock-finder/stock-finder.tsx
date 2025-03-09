@@ -10,6 +10,7 @@ import { EventEmitter } from "stream";
 export class StockFinder {
   stockNameInput: HTMLInputElement;
   @State() results: Record<string, unknown>[] = []
+  @State() loading = false
 
   @Event({eventName: 'mcSymbolSelected' , bubbles: true, composed: true}) mcSymbolSelected: EventEmitter<any>
 
@@ -17,15 +18,19 @@ export class StockFinder {
     event.preventDefault();
     const stockName = this.stockNameInput.value?.trim()
 
+    this.loading = true
+
     fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${stockName}&apikey=${apiKey}`)
       .then(async (res) => {
         const response = await res.json();
         console.log(response);
 
         this.results = response.bestMatches
+        this.loading = false
       })
       .catch(err => {
         console.log("We have an error at stock-finder component ", err);
+        this.loading = false
       });
 
   }
@@ -50,7 +55,7 @@ export class StockFinder {
           <strong>Name</strong>
           <strong>Symbol</strong>
         </li>
-        {this.results.map((result) => (
+        {this.loading ? <mc-spinner></mc-spinner> : this.results.map((result) => (
           <li onClick={this.onStockSelected.bind(this, result['1. symbol'])}>
             <strong>{result['2. name']}</strong>
             <strong>{result['1. symbol']}</strong>

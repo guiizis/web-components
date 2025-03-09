@@ -125,8 +125,6 @@ export class StockPrice {
       dataContent = <p>{this.error}</p>
     }
 
-    const spinner = <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
-
     return [
       <form onSubmit={this.onFetchStockPrice.bind(this)}>
         {/* <input id="stock-symbol" ref={el => this.stockInput = el}/> */}
@@ -140,7 +138,7 @@ export class StockPrice {
         <button disabled={!this.stockUserInputValid || this.loading} type="submit">Fetch</button>
       </form>,
       <div>
-        {this.loading ? spinner : dataContent}
+        {this.loading ? <mc-spinner></mc-spinner> : dataContent}
       </div>
     ]
   }

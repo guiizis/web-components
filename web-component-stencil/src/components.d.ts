@@ -11,6 +11,8 @@ export namespace Components {
         "open": boolean;
         "openMethod": () => Promise<void>;
     }
+    interface McSpinner {
+    }
     interface McStockFinder {
     }
     interface McStockPrice {
@@ -46,6 +48,12 @@ declare global {
         prototype: HTMLMcSideDrawerElement;
         new (): HTMLMcSideDrawerElement;
     };
+    interface HTMLMcSpinnerElement extends Components.McSpinner, HTMLStencilElement {
+    }
+    var HTMLMcSpinnerElement: {
+        prototype: HTMLMcSpinnerElement;
+        new (): HTMLMcSpinnerElement;
+    };
     interface HTMLMcStockFinderElementEventMap {
         "mcSymbolSelected": any;
     }
@@ -77,6 +85,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "mc-side-drawer": HTMLMcSideDrawerElement;
+        "mc-spinner": HTMLMcSpinnerElement;
         "mc-stock-finder": HTMLMcStockFinderElement;
         "mc-stock-price": HTMLMcStockPriceElement;
         "my-component": HTMLMyComponentElement;
@@ -86,6 +95,8 @@ declare namespace LocalJSX {
     interface McSideDrawer {
         "alow"?: string;
         "open"?: boolean;
+    }
+    interface McSpinner {
     }
     interface McStockFinder {
         "onMcSymbolSelected"?: (event: McStockFinderCustomEvent<any>) => void;
@@ -113,6 +124,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "mc-side-drawer": McSideDrawer;
+        "mc-spinner": McSpinner;
         "mc-stock-finder": McStockFinder;
         "mc-stock-price": McStockPrice;
         "my-component": MyComponent;
@@ -123,6 +135,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "mc-side-drawer": LocalJSX.McSideDrawer & JSXBase.HTMLAttributes<HTMLMcSideDrawerElement>;
+            "mc-spinner": LocalJSX.McSpinner & JSXBase.HTMLAttributes<HTMLMcSpinnerElement>;
             "mc-stock-finder": LocalJSX.McStockFinder & JSXBase.HTMLAttributes<HTMLMcStockFinderElement>;
             "mc-stock-price": LocalJSX.McStockPrice & JSXBase.HTMLAttributes<HTMLMcStockPriceElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
